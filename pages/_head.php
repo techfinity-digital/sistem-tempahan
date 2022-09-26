@@ -15,3 +15,5 @@
 </head>
 <body>
 <?php require APP_PATH.'/pages/_menu.php'; ?>
+
+<?php showMessage(); ?>

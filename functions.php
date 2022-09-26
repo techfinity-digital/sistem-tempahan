@@ -145,3 +145,48 @@ function sendEmail($to, $from, $subject, $message)
 
     $mailer->send($email);
 }
+
+/**
+ * Show message
+ * @return void
+ */
+function showMessage()
+{
+    $status = isset($_REQUEST['status']) ? $_REQUEST['status'] : 'success';
+    $html = '';
+
+    if (isset($_REQUEST['message'])) {
+        $html .= '<div class="container">';
+        $html .= '    <div class="row">';
+        $html .= '        <div class="col">';
+        $html .= '             <div class="mb-3 alert alert-' . $status . '">';
+        $html .=                   $_REQUEST['message'];
+        $html .= '             </div>';
+        $html .= '        </div>';
+        $html .= '    </div>';
+        $html .= '</div>';
+
+        echo $html;
+    }
+}
+
+/**
+ * Redirect to another page
+ *
+ * @param $location
+ * @param $message
+ * @param $status
+ * @return void
+ */
+function redirect($location, $message = null, $status = 'success')
+{
+    $uri = '';
+
+    if (! is_null($message)) {
+        $uri .= '?message='.$message;
+        $uri .= '&status='.$status;
+    }
+
+    header('Location: '.$location.$uri);
+    exit();
+}
