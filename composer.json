@@ -1,0 +1,10 @@
+{
+    "name": "kvks/tempahan",
+    "description": "Sistem tempahan kenderaan",
+    "type": "project",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "require": {
+        "catfan/medoo": "^2.1"
+    }
+}
