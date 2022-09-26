@@ -6,6 +6,7 @@
     "minimum-stability": "stable",
     "require": {
         "catfan/medoo": "^2.1",
-        "opis/database": "^4.2"
+        "opis/database": "^4.2",
+        "symfony/password-hasher": "^5.4"
     }
 }
