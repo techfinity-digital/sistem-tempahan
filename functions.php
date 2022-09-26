@@ -2,6 +2,9 @@
 
 use Opis\Database\Database;
 use Opis\Database\Connection;
+use Symfony\Component\Mailer\Transport;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactory;
 
 /**
@@ -110,4 +113,35 @@ function passwordVerify($password, $hash)
 
     // Verify that a given plain password matches the hash
     return $passwordHasher->verify($hash, $password);
+}
+
+/**
+ * Send email to user. Refer https://github.com/symfony/mailer.
+ *
+ * @param $to
+ * @param $from
+ * @param $subject
+ * @param $message
+ * @return void
+ * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
+ */
+function sendEmail($to, $from, $subject, $message)
+{
+    $dsn = EMAIL_TYPE.'://'.EMAIL_USER.':'.EMAIL_PASSWORD.'@s'.EMAIL_HOST.':'.EMAIL_PORT;
+
+    $transport = Transport::fromDsn($dsn);
+
+    $mailer = new Mailer($transport);
+
+    $email = (new Email())
+        ->from($from)
+        ->to($to)
+        //->cc('cc@example.com')
+        //->bcc('bcc@example.com')
+        //->replyTo('fabien@example.com')
+        //->priority(Email::PRIORITY_HIGH)
+        ->subject($subject)
+        ->html($message);
+
+    $mailer->send($email);
 }
