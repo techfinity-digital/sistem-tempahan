@@ -5,6 +5,7 @@
     "license": "MIT",
     "minimum-stability": "stable",
     "require": {
-        "catfan/medoo": "^2.1"
+        "catfan/medoo": "^2.1",
+        "opis/database": "^4.2"
     }
 }

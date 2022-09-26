@@ -54,6 +54,13 @@ require __DIR__.'/init.php';
 </nav>
 
 <main class="container">
+    <?php
+    global $db;
+
+    $result = $db->from('users')
+        ->select()
+        ->all();
+    ?>
     <div class="bg-light p-5 rounded">
         <h1>Navbar example</h1>
         <p class="lead">This example is a quick exercise to illustrate how fixed to top navbar works. As you scroll, it will remain fixed to the top of your browser’s viewport.</p>
