@@ -27,4 +27,8 @@ if (! passwordVerify($password, $user->password)) {
 $_SESSION['user_id'] = $user->id;
 $_SESSION['user_name'] = $user->name;
 
-redirect(APP_URL.'/index.php','Selamat datang!', 'success');
+if ($user->role === 'admin') {
+    redirect(APP_URL . '/pages/admin/index.php', 'Selamat datang!', 'success');
+} else {
+    redirect(APP_URL . '/pages/user/index.php', 'Selamat datang!', 'success');
+}
