@@ -26,6 +26,12 @@
 
             <ul class="navbar-nav ms-auto mb-2 mb-md-0">
                 <?php if (isLoggedIn()) : ?>
+                    <?php if (isAdmin()) : ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo APP_URL; ?>/pages/admin/user/index.php">Pengguna</a>
+                        </li>
+                    <?php endif; ?>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <?php echo user('name'); ?>

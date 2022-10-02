@@ -55,6 +55,16 @@ function isLoggedIn()
 }
 
 /**
+ * Check if the user is an admin
+ *
+ * @return bool
+ */
+function isAdmin()
+{
+    return isset($_SESSION['user_role']) AND $_SESSION['user_role'] === 'admin';
+}
+
+/**
  * Get information for logged-in user. Return false if not legged-in.
  *
  * @param $field
