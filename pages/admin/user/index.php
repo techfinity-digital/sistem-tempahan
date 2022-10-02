@@ -14,7 +14,15 @@ $users = $db->from('users')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <h2>Senarai Pengguna</h2>
+                <h2>
+                    Senarai Pengguna
+
+                    <div class="float-end">
+                        <a href="/pages/admin/user/create.php" class="btn btn-primary">
+                            Tambah
+                        </a>
+                    </div>
+                </h2>
                 <div class="card">
                     <div class="card-table table-responsive-sm">
                         <table class="table table-hover">
