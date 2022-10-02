@@ -127,7 +127,7 @@ function passwordVerify($password, $hash)
  */
 function sendEmail($to, $from, $subject, $message)
 {
-    $dsn = EMAIL_TYPE.'://'.EMAIL_USER.':'.EMAIL_PASSWORD.'@s'.EMAIL_HOST.':'.EMAIL_PORT;
+    $dsn = EMAIL_TYPE.'://'.EMAIL_USER.':'.EMAIL_PASSWORD.'@'.EMAIL_HOST.':'.EMAIL_PORT;
 
     $transport = Transport::fromDsn($dsn);
 
