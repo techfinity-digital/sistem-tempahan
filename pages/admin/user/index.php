@@ -40,7 +40,7 @@ $users = $db->from('users')
                                             <td><?php echo $user->name; ?></td>
                                             <td><?php echo $user->email; ?></td>
                                             <td>
-                                                <a href="#" class="btn btn-sm btn-warning">
+                                                <a href="/pages/admin/user/edit.php?id=<?php echo $user->id; ?>" class="btn btn-sm btn-warning">
                                                     Ubah
                                                 </a>
 
