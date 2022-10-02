@@ -44,7 +44,7 @@ $users = $db->from('users')
                                                     Ubah
                                                 </a>
 
-                                                <a href="#" class="btn btn-sm btn-danger">
+                                                <a href="/pages/admin/user/delete.php?id=<?php echo $user->id; ?>" class="btn btn-sm btn-danger">
                                                     Padam
                                                 </a>
                                             </td>
