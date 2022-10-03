@@ -30,6 +30,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo APP_URL; ?>/pages/admin/user/index.php">Pengguna</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo APP_URL; ?>/pages/admin/vehicle/index.php">
+                                Kenderaan
+                            </a>
+                        </li>
                     <?php endif; ?>
 
                     <li class="nav-item dropdown">
