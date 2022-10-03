@@ -19,3 +19,6 @@ const EMAIL_HOST = 'smtp.mailtrap.io';
 const EMAIL_USER = 'cb69c189825a4e';
 const EMAIL_PASSWORD = 'b9c790f14ea9c4';
 const EMAIL_PORT = 587;
+
+// User avatar path
+const IMAGE_PATH = __DIR__.'/uploads/image';

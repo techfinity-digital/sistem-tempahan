@@ -2,11 +2,13 @@
 // Start-up script
 require_once __DIR__.'/../../../init.php';
 require APP_PATH.'/pages/_head.php';
+
+abortIfNotAdmin();
 ?>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
-            <form action="<?php echo APP_URL; ?>/includes/admin/vehicle/create.php" method="post">
+            <form action="/includes/admin/vehicle/create.php" method="post">
                 <h2>Tambah Kenderaan</h2>
                 <div class="card">
                     <div class="card-body">

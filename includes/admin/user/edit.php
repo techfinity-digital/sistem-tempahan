@@ -1,10 +1,8 @@
 <?php
-use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
-
 // Start-up script
 require_once __DIR__ . '/../../../init.php';
 
-global $db;
+use Illuminate\Database\Capsule\Manager as DB;
 
 // Get all user inputs
 $name = filter_var($_REQUEST['name'], FILTER_SANITIZE_STRING);
@@ -34,16 +32,13 @@ if (! empty($password)) {
 
 try {
     // Save to database
-    $db->update('users')
-        ->where('id')
-        ->is($_REQUEST['id'])
-        ->set($data);
+    DB::table('users')
+        ->update($data)
+        ->where('id', $_REQUEST['id']);
 
     $loginUrl = url('pages/login.php');
 
     redirect(APP_URL.'/pages/admin/user/index.php','Kemaskini selesai!');
 } catch (Exception $e) {
-    die($e->getMessage());
-} catch (TransportExceptionInterface $e) {
     die($e->getMessage());
 }

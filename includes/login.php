@@ -3,15 +3,14 @@
 // Start-up script
 require_once __DIR__ . '/../init.php';
 
-global $db;
+use Illuminate\Database\Capsule\Manager as DB;
 
 $email = filter_var($_REQUEST['email'], FILTER_SANITIZE_STRING);
 $password = filter_var($_REQUEST['password'], FILTER_SANITIZE_STRING);
 
 // Get user hashed password
-$user = $db->from('users')
-    ->where('email')->is($email)
-    ->select()
+$user = DB::table('users')
+    ->where('email', $email)
     ->first();
 
 if (! $user) {
@@ -28,7 +27,7 @@ $_SESSION['user_id'] = $user->id;
 $_SESSION['user_name'] = $user->name;
 $_SESSION['user_role'] = $user->role;
 
-if ($user->role === 'admin') {
+if ($user->role == 'admin') {
     redirect(APP_URL . '/pages/admin/index.php', 'Selamat datang!', 'success');
 } else {
     redirect(APP_URL . '/pages/user/index.php', 'Selamat datang!', 'success');

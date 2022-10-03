@@ -4,7 +4,7 @@ use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 // Start-up script
 require_once __DIR__ . '/../../../init.php';
 
-global $db;
+use Illuminate\Database\Capsule\Manager as DB;
 
 // Get all user inputs
 $name = filter_var($_REQUEST['name'], FILTER_SANITIZE_STRING);
@@ -26,12 +26,13 @@ $password = passwordHash($password);
 
 try {
     // Save to database
-    $db->insert(array(
+    DB::table('users')
+        ->insert([
         'name' => $name,
         'email' => $email,
         'password' => $password,
         'role' => 'user'
-    ))->into('users');
+    ]);
 
     $loginUrl = url('pages/login.php');
 

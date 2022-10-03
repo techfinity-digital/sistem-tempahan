@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Capsule\Manager as Capsule;
 use Opis\Database\Database;
 use Opis\Database\Connection;
 use Symfony\Component\Mailer\Transport;
@@ -16,13 +17,17 @@ use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactory;
 function getDatabase()
 {
     try {
-        $connection = new Connection(
-            DB_TYPE . ':host=' . DB_HOST . ';dbname=' . DB_DATABASE,
-            DB_USER,
-            DB_PASSWORD
-        );
+        $capsule = new Capsule;
 
-        return new Database($connection);
+        $capsule->addConnection([
+            'driver' => DB_TYPE,
+            'host' => DB_HOST,
+            'database' => DB_DATABASE,
+            'username' => DB_USER,
+            'password' => DB_PASSWORD
+        ]);
+        $capsule->setAsGlobal();
+        $capsule->bootEloquent();
     } catch (Exception $e) {
         die($e->getMessage());
     }
@@ -62,6 +67,18 @@ function isLoggedIn()
 function isAdmin()
 {
     return isset($_SESSION['user_role']) AND $_SESSION['user_role'] === 'admin';
+}
+
+/**
+ * Redirect user if not admin
+ *
+ * @return void
+ */
+function abortIfNotAdmin()
+{
+    if (! isAdmin()) {
+        redirect(APP_URL.'/index.php','Anda tiada akses!');
+    }
 }
 
 /**
@@ -199,4 +216,18 @@ function redirect($location, $message = null, $status = 'success')
 
     header('Location: '.$location.$uri);
     exit();
+}
+
+/**
+ * For debugging
+ *
+ * @param $input
+ * @return void
+ */
+function dd($input)
+{
+    echo '<pre>';
+    var_dump($input);
+    echo '</pre>';
+    die;
 }

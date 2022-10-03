@@ -3,25 +3,25 @@
 require_once __DIR__.'/../../../init.php';
 require APP_PATH.'/pages/_head.php';
 
-global $db;
+abortIfNotAdmin();
 
-$bookings = $db->from('bookings')
-    ->join('vehicles', function ($join) {
-        $join->on('bookings.id', 'vehicles.id');
-    })
-    ->join('users', function ($join) {
-        $join->on('bookings.id', 'users.id');
-    })
-    ->orderBy('started_at')
-    ->select()
-    ->all();
+use Illuminate\Database\Capsule\Manager as DB;
+
+$bookings = DB::table('bookings')
+    ->join('vehicles', 'bookings.vehicle_id', 'vehicles.id')
+    ->join('users', 'bookings.user_id', 'users.id')
+    ->select(
+'bookings.id', 'bookings.started_at', 'bookings.ended_at', 'bookings.booking_reason',
+        'bookings.booking_status', 'vehicles.registration_no', 'users.name'
+    )
+    ->get();
 ?>
 
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <h2>
-                    Senarai Tempahan
+                    Senarai Tempahan Baru
 
                     <div class="float-end">
                         <a href="/pages/admin/booking/create.php" class="btn btn-primary">

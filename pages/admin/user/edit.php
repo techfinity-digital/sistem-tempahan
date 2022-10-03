@@ -3,18 +3,18 @@
 require_once __DIR__.'/../../../init.php';
 require APP_PATH.'/pages/_head.php';
 
-global $db;
+abortIfNotAdmin();
 
-$user = $db->from('users')
-    ->where('id')
-    ->is($_REQUEST['id'])
-    ->select()
+use Illuminate\Database\Capsule\Manager as DB;
+
+$user = DB::table('users')
+    ->where('id', $_REQUEST['id'])
     ->first();
 ?>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
-            <form action="<?php echo APP_URL; ?>/includes/admin/user/edit.php?id=<?php echo $user->id; ?>" method="post">
+            <form action="/includes/admin/user/edit.php?id=<?php echo $user->id; ?>" method="post">
                 <h2>Ubah Pengguna</h2>
                 <div class="card">
                     <div class="card-body">

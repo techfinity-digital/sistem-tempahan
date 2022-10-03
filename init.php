@@ -14,8 +14,5 @@ const APP_PATH = __DIR__;
 // Start the session
 session_start();
 
-// Database object
-global $db;
-
 // Create new database object
-$db = getDatabase();
+getDatabase();

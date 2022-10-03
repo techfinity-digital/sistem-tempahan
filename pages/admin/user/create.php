@@ -2,6 +2,8 @@
 // Start-up script
 require_once __DIR__.'/../../../init.php';
 require APP_PATH.'/pages/_head.php';
+
+abortIfNotAdmin();
 ?>
 <div class="container">
     <div class="row justify-content-center">

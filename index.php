@@ -1,16 +1,10 @@
 <?php
 // Start-up script
 require_once __DIR__.'/init.php';
-require APP_PATH.'/pages/_head.php'; ?>
+require APP_PATH.'/pages/_head.php';
+?>
 
 <main class="container">
-    <?php
-    global $db;
-
-    $result = $db->from('users')
-        ->select()
-        ->all();
-    ?>
     <div class="bg-light p-5 rounded">
         <h1><?php echo APP_NAME; ?></h1>
         <p class="lead">

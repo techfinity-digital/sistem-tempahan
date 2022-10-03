@@ -7,8 +7,8 @@ abortIfNotAdmin();
 
 use Illuminate\Database\Capsule\Manager as DB;
 
-DB::table('users')
+DB::table('bookings')
     ->where('id', $_REQUEST['id'])
     ->delete();
 
-redirect(APP_URL.'/pages/admin/user/index.php','Pengguna telah dipadam dari sistem!');
+redirect(APP_URL.'/pages/admin/booking/index.php','Tempahan telah dipadam!');

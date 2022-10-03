@@ -8,6 +8,8 @@
         "catfan/medoo": "^2.1",
         "opis/database": "^4.2",
         "symfony/password-hasher": "^5.4",
-        "symfony/mailer": "^5.4"
+        "symfony/mailer": "^5.4",
+        "illuminate/database": "^8.83",
+        "illuminate/support": "^8.83"
     }
 }

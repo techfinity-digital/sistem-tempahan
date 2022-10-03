@@ -3,14 +3,14 @@
 require_once __DIR__.'/../../../init.php';
 require APP_PATH.'/pages/_head.php';
 
-global $db;
+abortIfNotAdmin();
 
-$vehicles = $db->from('vehicles')
-    ->orderBy('name')
-    ->select()
-    ->all();
+use Illuminate\Database\Capsule\Manager as DB;
+
+$vehicles = DB::table('vehicles')
+    ->orderBy('registration_no')
+    ->get();
 ?>
-
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">

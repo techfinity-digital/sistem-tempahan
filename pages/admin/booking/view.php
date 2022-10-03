@@ -3,18 +3,19 @@
 require_once __DIR__.'/../../../init.php';
 require APP_PATH.'/pages/_head.php';
 
-global $db;
+abortIfNotAdmin();
 
-$booking = $db->from('bookings')
-    ->join('vehicles', function ($join) {
-        $join->on('bookings.id', 'vehicles.id');
-    })
-    ->join('users', function ($join) {
-        $join->on('bookings.id', 'users.id');
-    })
-    ->where('bookings.id')
-    ->is($_REQUEST['id'])
-    ->select()
+use Illuminate\Database\Capsule\Manager as DB;
+
+$booking = DB::table('bookings')
+    ->join('vehicles', 'bookings.vehicle_id', 'vehicles.id')
+    ->join('users', 'bookings.user_id', 'users.id')
+    ->select(
+        'bookings.started_at', 'bookings.ended_at', 'bookings.booking_reason',
+        'bookings.booking_status', 'vehicles.registration_no', 'vehicles.brand',
+        'vehicles.model', 'users.name'
+    )
+    ->where('bookings.id', $_REQUEST['id'])
     ->first();
 ?>
 <div class="container">
@@ -114,7 +115,7 @@ $booking = $db->from('bookings')
                     <div class="mb-0 row">
                         <label
                             class="col-md-3 col-form-label">
-                            Alasan
+                            Tunjuan
                         </label>
                         <div class="col-md-8">
                             <div class="form-control-plaintext fw-bold">
