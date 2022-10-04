@@ -77,7 +77,7 @@ function isAdmin()
 function abortIfNotAdmin()
 {
     if (! isAdmin()) {
-        redirect(APP_URL.'/index.php','Anda tiada akses!');
+        redirect(APP_URL.'/index.php','Anda tiada akses!', 'danger');
     }
 }
 

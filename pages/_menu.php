@@ -53,7 +53,7 @@
                             <li><a class="dropdown-item" href="/pages/user/profile.php">Profil</a></li>
                             <li><a class="dropdown-item" href="/pages/user/image.php">Gambar</a></li>
                             <li><a class="dropdown-item" href="/pages/user/password.php">Kata Laluan</a></li>
-                            <li><a class="dropdown-item" href="/pages/user/bookings.php">Tempahan Anda</a></li>
+                            <li><a class="dropdown-item" href="/pages/user/booking/index.php">Tempahan Anda</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="/pages/logout.php">Log Keluar</a></li>
                         </ul>

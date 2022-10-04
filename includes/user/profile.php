@@ -16,7 +16,7 @@ $data = [
 try {
     // Save to database
     DB::table('users')
-        ->where('id', $_REQUEST['id'])
+        ->where('id', $_SESSION['user_id'])
         ->update([
             'name' => $name,
             'email' => $email,

@@ -1,6 +1,6 @@
 <?php
 // Start-up script
-require_once __DIR__.'/../../init.php';
+require_once __DIR__.'/../../../init.php';
 require APP_PATH.'/pages/_head.php';
 
 use Illuminate\Database\Capsule\Manager as DB;
@@ -9,18 +9,23 @@ $bookings = DB::table('bookings')
     ->join('vehicles', 'bookings.vehicle_id', 'vehicles.id')
     ->select(
         'bookings.id', 'bookings.started_at', 'bookings.ended_at', 'bookings.booking_reason',
-        'bookings.booking_status', 'vehicles.registration_no', 'bookings.user_id'
+        'bookings.booking_status', 'bookings.user_id', 'vehicles.registration_no',
     )
-    ->where('booking_status', 'baru')
-    ->where('user_id', $_SESSION['user_id'])
-    ->limit(5)
+    ->where('bookings.user_id', $_SESSION['user_id'])
     ->get();
 ?>
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <h2>
-                    Tempahan Terkini Anda
+                    Senarai Tempahan
+
+                    <div class="float-end">
+                        <a href="/pages/user/booking/create.php" class="btn btn-primary">
+                            Tambah
+                        </a>
+                    </div>
                 </h2>
                 <div class="card">
                     <div class="card-table table-responsive-sm">
@@ -57,22 +62,22 @@ $bookings = DB::table('bookings')
                                             </a>
 
                                             <?php if ($booking->booking_status == 'baru') : ?>
-                                                <a href="/pages/user/booking/edit.php?id=<?php echo $booking->id; ?>"
-                                                   class="btn btn-sm btn-warning">
-                                                    Ubah
-                                                </a>
+                                            <a href="/pages/user/booking/edit.php?id=<?php echo $booking->id; ?>"
+                                               class="btn btn-sm btn-warning">
+                                                Ubah
+                                            </a>
 
-                                                <a href="/pages/user/booking/cancel.php?id=<?php echo $booking->id; ?>"
-                                                   class="btn btn-sm btn-danger">
-                                                    Batal
-                                                </a>
+                                            <a href="/pages/user/booking/cancel.php?id=<?php echo $booking->id; ?>"
+                                               class="btn btn-sm btn-danger">
+                                                Batal
+                                            </a>
                                             <?php endif; ?>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
                             <?php else : ?>
                                 <tr>
-                                    <td colspan="6" class="text-center">
+                                    <td colspan="5" class="text-center">
                                         Maaf, tiada rekod.
                                     </td>
                                 </tr>
@@ -80,9 +85,10 @@ $bookings = DB::table('bookings')
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </div><!-- /.card -->
             </div>
-        </div>
-    </div>
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+
 <?php
 require APP_PATH.'/pages/_footer.php';
